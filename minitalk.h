@@ -6,7 +6,7 @@
 /*   By: dim <dim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 06:28:41 by dim               #+#    #+#             */
-/*   Updated: 2021/09/11 06:32:49 by dim              ###   ########.fr       */
+/*   Updated: 2021/09/12 17:28:38 by dim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <signal.h>
 
+int		ft_atoi(char *str);
 void	ft_putnbr(int nbr);
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
