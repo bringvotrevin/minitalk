@@ -6,7 +6,7 @@
 /*   By: dim <dim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 03:06:05 by dim               #+#    #+#             */
-/*   Updated: 2021/09/12 19:08:51 by dim              ###   ########.fr       */
+/*   Updated: 2021/09/15 06:16:58 by dim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ void	to_server(int server_pid, char *msg)
 
 void	ft_sighandler(int signum, siginfo_t *siginfo, void *non)
 {
-
+	(void)signum;
+	(void)siginfo;
+	(void)non;
 }
 
 int		main(int argc, char *argv[])
