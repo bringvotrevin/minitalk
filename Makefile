@@ -9,7 +9,8 @@ DEBUGFLAGS = -g -fsanitize=address
 CFLAGS = $(WFLAGS) $(INCFLAGS) $(DEBUGFLAGS)
 
 SRC1 = client.c \
-	   minitalk_util.c
+	   minitalk_util.c \
+	   ft_atoi.c
 
 SRC2 = server.c \
 	   minitalk_util.c

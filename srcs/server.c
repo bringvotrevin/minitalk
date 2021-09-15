@@ -6,12 +6,11 @@
 /*   By: dim <dim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 03:09:43 by dim               #+#    #+#             */
-/*   Updated: 2021/09/15 16:44:59 by dim              ###   ########.fr       */
+/*   Updated: 2021/09/15 21:11:36 by dim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
-
 
 void	ft_sighandler(int signum, siginfo_t *siginfo, void *non)
 {
@@ -33,7 +32,7 @@ void	ft_sighandler(int signum, siginfo_t *siginfo, void *non)
 	}
 }
 
-int		main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	struct sigaction	sigact;
 

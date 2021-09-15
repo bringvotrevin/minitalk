@@ -6,7 +6,7 @@
 /*   By: dim <dim@student.42seoul.kr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/27 03:06:05 by dim               #+#    #+#             */
-/*   Updated: 2021/09/15 17:12:22 by dim              ###   ########.fr       */
+/*   Updated: 2021/09/15 21:11:55 by dim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	send_msg(int server_pid, char bit_msg)
 		else
 			kill(server_pid, SIGUSR2);
 		bit >>= 1;
-		usleep(1000);
+		usleep(100);
 	}
 }
 
@@ -47,7 +47,7 @@ void	ft_sighandler(int signum, siginfo_t *siginfo, void *non)
 	(void)non;
 }
 
-int		main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	struct sigaction	sigact;
 	int					server_pid;
