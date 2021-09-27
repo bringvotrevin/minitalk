@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   minitalk_bonus.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dim <dim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/11 06:28:41 by dim               #+#    #+#             */
-/*   Updated: 2021/09/25 18:07:06 by dim              ###   ########.fr       */
+/*   Created: 2021/09/25 16:52:37 by dim               #+#    #+#             */
+/*   Updated: 2021/09/25 18:16:43 by dim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#ifndef MINITALK_BONUS_H
+# define MINITALK_BONUS_H
 # include <unistd.h>
 # include <signal.h>
 # include <stdlib.h>

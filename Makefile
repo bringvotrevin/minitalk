@@ -1,12 +1,12 @@
 .PHONY : bonus all claen fclean re
-NAME1 = client
+NAME = client
 NAME2 = server
 SRCDIR = srcs/
 CC = gcc
 RM = rm -rf
 WFLAGS = -Wall -Werror -Wextra
 DEBUGFLAGS = -g -fsanitize=address
-CFLAGS = $(WFLAGS) $(INCFLAGS) $(DEBUGFLAGS)
+CFLAGS = $(WFLAGS) $(INCFLAGS) #$(DEBUGFLAGS)
 
 SRC1 = client.c \
 	   minitalk_util.c \
@@ -15,26 +15,36 @@ SRC1 = client.c \
 SRC2 = server.c \
 	   minitalk_util.c
 
-SRCS1 =	$(addprefix $(SRCDIR), $(SRC1))
+BRC1 = client_bonus.c \
+	   minitalk_util_bonus.c \
+	   ft_atoi_bonus.c
 
+BRC2 = server_bonus.c \
+	   minitalk_util_bonus.c
+
+ifdef WITH_BONUS
+	SRC1 = $(BRC1)
+	SRC2 = $(BRC2)
+endif
+
+SRCS1 =	$(addprefix $(SRCDIR), $(SRC1))
 SRCS2 = $(addprefix $(SRCDIR), $(SRC2))
 
-OBJS1 = $(SRCS1:.c=.o)
+all : ${NAME} ${NAME2} 
 
-OBJS2 = $(SRCS2:.c=.o)
+${NAME} :
+			$(CC) $(CFLAGS) $(SRCS1) -o $(NAME)
 
-${NAME1} : ${OBJS1}
-			$(CC) $(CFLAGS) $(OBJS1) -o $(NAME1)
+${NAME2} :
+			$(CC) $(CFLAGS) $(SRCS2) -o $(NAME2)
 
-${NAME2} : ${OBJS2}
-			$(CC) $(CFLAGS) $(OBJS2) -o $(NAME2)
-
-all :		${NAME1} ${NAME2}
+bonus : 
+			make WITH_BONUS=1 all
 
 clean :
 			${RM} ${OBJS1} ${OBJS2}
 
 fclean :	clean
-			${RM} ${NAME1} ${NAME2}
+			${RM} ${NAME} ${NAME2}
 
 re :		fclean all

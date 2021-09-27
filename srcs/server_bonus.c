@@ -1,60 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dim <dim@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/27 03:06:05 by dim               #+#    #+#             */
-/*   Updated: 2021/09/25 18:13:20 by dim              ###   ########.fr       */
+/*   Created: 2021/09/25 16:33:12 by dim               #+#    #+#             */
+/*   Updated: 2021/09/25 18:17:16 by dim              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minitalk.h"
-
-void	send_msg(int server_pid, char bit_msg)
-{
-	unsigned char	bit;
-	int				count;
-
-	count = 8;
-	bit = 0b10000000;
-	while (count--)
-	{
-		if (bit & bit_msg)
-			kill(server_pid, SIGUSR1);
-		else
-			kill(server_pid, SIGUSR2);
-		bit >>= 1;
-		usleep(100);
-	}
-}
-
-void	to_server(int server_pid, char *msg)
-{
-	while (*msg)
-	{
-		send_msg(server_pid, *msg);
-		msg++;
-	}
-	send_msg(server_pid, 0);
-}
+#include "../minitalk_bonus.h"
 
 void	ft_sighandler(int signum, siginfo_t *siginfo, void *non)
 {
-	(void)signum;
+	static int				bitnum = 0;
+	static unsigned char	bit = 0b00000000;
+
 	(void)siginfo;
 	(void)non;
+	if (signum == SIGUSR1)
+		bit += 1 << (7 - bitnum);
+	bitnum++;
+	if (bitnum == 8)
+	{
+		if (bit == '\0')
+			ft_putchar('\n');
+		ft_putchar(bit);
+		bitnum = 0;
+		bit = 0b00000000;
+	}
 }
 
 int	main(int argc, char *argv[])
 {
 	struct sigaction	sigact;
-	int					server_pid;
 
-	if (argc != 3)
-		ft_error("argc error\n");
-	server_pid = ft_atoi(argv[1]);
+	(void)argv;
+	if (argc > 1)
+		ft_error("too many arguments\n");
+	ft_putstr("[server pid : ");
+	ft_putnbr(getpid());
+	ft_putstr("]\n");
 	sigact.sa_flags = SA_SIGINFO;
 	sigact.sa_sigaction = ft_sighandler;
 	sigemptyset(&sigact.sa_mask);
@@ -62,6 +49,7 @@ int	main(int argc, char *argv[])
 		ft_error("sigaction error\n");
 	if (sigaction(SIGUSR2, &sigact, NULL) == -1)
 		ft_error("sigaction error\n");
-	to_server(server_pid, argv[2]);
+	while (1)
+		pause();
 	return (0);
 }
